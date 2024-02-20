@@ -18,20 +18,17 @@ const News = (props) => {
 
   const getApiData = async (bool) => {
     setLoading(true);
-    let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=583c965aa3ab41489f30fb84f421307b&pageSize=${props.page_size}&page=${(bool === 1 ? page+1 : page)}`;
-    console.log(url);
+    let url = `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=${process.env.REACT_APP_API_KEY}&pageSize=${props.page_size}&page=${(bool === 1 ? page+1 : page)}`;
     // let data = await fetch(url);
     let data = {};
     let parsedData = await data.json();
     // let last_page = Math.ceil(parsedData.totalResults / pageSize);
     
     if(bool === 1){
-      console.log('in if');
       setArticle(article.concat(parsedData.articles));
       setPage(page + 1);
       setProgress(progress + progressSize);
     }else{
-      console.log('in else');
       let page_percent = Math.ceil((100 / parsedData.totalResults) * props.page_size);
       setArticle(parsedData.articles);
       setTotalRecords(parsedData.totalResults);

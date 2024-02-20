@@ -6,7 +6,7 @@ import News from "./components/News";
 
 const App = () => {
     const [count, setcount] = useState(5);
-
+    
     const getPageSize = (e) => {
       setcount(e.target.value);
     }
